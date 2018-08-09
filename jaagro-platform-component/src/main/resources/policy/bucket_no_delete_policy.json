@@ -1,0 +1,16 @@
+{
+  "Statement": [
+    {
+      "Action": [
+        "oss:GetObject",
+        "oss:PutObject",
+        "oss:ListParts",
+        "oss:AbortMultipartUpload",
+        "oss:ListObjects"
+      ],
+      "Effect": "Allow",
+      "Resource": ["acs:oss:*:*:jatms/test/*", "acs:oss:*:*:jatms/prod/*"]
+    }
+  ],
+  "Version": "1"
+}
