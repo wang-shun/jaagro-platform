@@ -100,7 +100,7 @@ public class ContractServiceImpl implements ContractService {
                 BeanUtils.copyProperties(cp, contractPrice);
                 contractPrice.setContractId(contract.getId());
                 if (StringUtils.isEmpty(contractPrice.getPricingType())) {
-                    throw new RuntimeException("计价方式不能为空");
+                    throw new RuntimeException("计价模式不能为空");
                 }
                 contractPriceMapper.insert(contractPrice);
                 //创建contractSectionPrice对象
