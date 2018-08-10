@@ -8,6 +8,7 @@ import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
 import com.jaagro.microservice.platform.api.service.auth.CurrentUserService;
 import com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
+import com.jaagro.microservice.platform.component.utils.ResponseStatusCode;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
 import com.jaagro.microservice.platform.crm.entity.Contract;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
@@ -130,7 +131,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Map<String, Object> getContractByPk(Long contractId) {
         if (contractId == null) {
-            return ServiceResult.error(StatusCode.ID_VALUE_ERROR.getCode(), "contractId不能为空");
+            return ServiceResult.error(ResponseStatusCode.ID_VALUE_ERROR.getCode(), "contractId不能为空");
         }
         return ServiceResult.toResult(contractMapper.getByPrimaryKey(contractId));
     }
