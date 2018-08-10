@@ -18,16 +18,35 @@
         <result column="new_update_time" jdbcType="TIMESTAMP" property="newUpdateTime"/>
         <result column="new_update_user" jdbcType="BIGINT" property="newUpdateUser"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
+    </resultMap>
 
-        <collection property="prices" column="id" select="com.jaagro.microservice.platform.crm.mapper.ContractPriceMapper.getByContractId"></collection>
+    <resultMap id="DetailInfo" type="com.jaagro.microservice.platform.crm.entity.response.ContractReturnDto">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="customer_id" jdbcType="BIGINT" property="customerId"/>
+        <result column="contract_status" jdbcType="INTEGER" property="contractStatus"/>
+        <result column="start_date" jdbcType="DATE" property="startDate"/>
+        <result column="end_date" jdbcType="DATE" property="endDate"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="theme" jdbcType="VARCHAR" property="theme"/>
+        <result column="product" jdbcType="VARCHAR" property="product"/>
+        <result column="context" jdbcType="VARCHAR" property="context"/>
+        <result column="contract_number" jdbcType="VARCHAR" property="contractNumber"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="new_update_time" jdbcType="TIMESTAMP" property="newUpdateTime"/>
+        <result column="new_update_user" jdbcType="BIGINT" property="newUpdateUser"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+
+        <collection property="prices" column="id"
+                    select="com.jaagro.microservice.platform.crm.mapper.ContractPriceMapper.getByContractId"></collection>
     </resultMap>
     <sql id="Base_Column_List">
     id, customer_id, contract_status, start_date, end_date, type, theme, product, context, 
     contract_number, remark, create_time, create_user, new_update_time, new_update_user, 
     version
   </sql>
-
-<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from contract
@@ -226,10 +245,17 @@
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-<select id="listByPage" parameterType="com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from contract
-    order by create_time desc
-</select>
+    <select id="listByPage" parameterType="com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from contract
+        order by create_time desc
+    </select>
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="DetailInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from contract
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 </mapper>

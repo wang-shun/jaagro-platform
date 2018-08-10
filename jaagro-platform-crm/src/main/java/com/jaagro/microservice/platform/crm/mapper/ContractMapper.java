@@ -4,6 +4,7 @@ import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
 import com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto;
 import com.jaagro.microservice.platform.crm.entity.Contract;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
+import com.jaagro.microservice.platform.crm.entity.response.ContractReturnDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -66,5 +67,13 @@ public interface ContractMapper {
      * @return
      */
     List<Contract> listByPage(ContractCriteriaDto dto);
+
+    /**
+     * 查询单个Dto
+     *
+     * @param id
+     * @return
+     */
+    ContractReturnDto getByPrimaryKey(Long id);
 
 }

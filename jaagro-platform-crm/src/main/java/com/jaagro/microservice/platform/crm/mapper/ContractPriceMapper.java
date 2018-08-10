@@ -2,6 +2,7 @@ package com.jaagro.microservice.platform.crm.mapper;
 
 import com.jaagro.microservice.platform.api.dto.crm.PriceCriteriaDto;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
+import com.jaagro.microservice.platform.crm.entity.response.ContractPriceReturnDto;
 
 import java.util.List;
 
@@ -63,7 +64,15 @@ public interface ContractPriceMapper {
      * @param contractId
      * @return
      */
-    List<ContractPrice> getByContractId(Long contractId);
+    List<ContractPrice> listByContractId(Long contractId);
+
+    /**
+     * 根据合同id 查出所有priceDto记录
+     *
+     * @param contractId
+     * @return
+     */
+    List<ContractPriceReturnDto> getByContractId(Long contractId);
 
     /**
      * 根据合同id删除price记录

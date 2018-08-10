@@ -1,4 +1,4 @@
-package com.jaagro.microservice.platform.api.dto.crm.response;
+package com.jaagro.microservice.platform.crm.entity.response;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @author tony
+ * @author baiyiran
  */
 @Data
 @Accessors(chain = true)

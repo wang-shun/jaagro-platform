@@ -4,12 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jaagro.microservice.platform.api.dto.crm.*;
 import com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto;
-import com.jaagro.microservice.platform.api.dto.crm.response.ContractReturnDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
+import com.jaagro.microservice.platform.component.utils.StatusCode;
 import com.jaagro.microservice.platform.crm.entity.Contract;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
 import com.jaagro.microservice.platform.crm.entity.ContractSectionPrice;
+import com.jaagro.microservice.platform.crm.entity.response.ContractPriceReturnDto;
+import com.jaagro.microservice.platform.crm.entity.response.ContractReturnDto;
 import com.jaagro.microservice.platform.crm.mapper.ContractLogMapper;
 import com.jaagro.microservice.platform.crm.mapper.ContractMapper;
 import com.jaagro.microservice.platform.crm.mapper.ContractPriceMapper;
@@ -79,7 +81,6 @@ public class ContractServiceImpl implements ContractService {
                 }
             }
         }
-
         return ServiceResult.toResult("合同创建成功");
     }
 
@@ -102,13 +103,14 @@ public class ContractServiceImpl implements ContractService {
         contractMapper.updateByPrimaryKeySelective(contract);
 
         //删除原数据
-        List<ContractPrice> priceList = contractPriceMapper.getByContractId(dto.getId());
+        List<ContractPrice> priceList = contractPriceMapper.listByContractId(dto.getId());
         if (priceList.size() > 0) {
             for (ContractPrice cp : priceList) {
                 contractSectionPriceMapper.deleteByPriceId(cp.getId());
             }
             contractPriceMapper.deleteByContractId(dto.getId());
         }
+
         //创建contractPrice对象
         if (dto.getPrice().size() > 0) {
             for (ContractPriceDto cp : dto.getPrice()) {
@@ -141,10 +143,10 @@ public class ContractServiceImpl implements ContractService {
      */
     @Override
     public Map<String, Object> getContractByPk(Long contractId) {
-        Contract contract = contractMapper.selectByPrimaryKey(contractId);
-        ContractReturnDto dto = new ContractReturnDto();
-        BeanUtils.copyProperties(contract, dto);
-        return ServiceResult.toResult(dto);
+        if (contractId == null) {
+            return ServiceResult.error(StatusCode.ID_VALUE_ERROR.getCode(), "contractId不能为空");
+        }
+        return ServiceResult.toResult(contractMapper.getByPrimaryKey(contractId));
     }
 
     /**
