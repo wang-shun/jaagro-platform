@@ -1,0 +1,26 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+/jaagro-platform-api/target/
+/jaagro-platform-auth/target/
+/jaagro-platform-biz/target/
+/jaagro-platform-biz/.mvn/
+/jaagro-platform-component/.mvn/
+/jaagro-platform-component/target/
+/jaagro-platform-crm/.mvn/
+/jaagro-platform-config/.mvn/
+/jaagro-platform-crm/target/
+/jaagro-platform-eureka/target/
+/jaagro-platform-eureka/.mvn/
+/jaagro-platform-gateway/.mvn/
+/jaagro-platform-gateway/target/
+/jaagro-platform-monitor/.mvn/
+/jaagro-platform-monitor/target/
+/jaagro-platform-tms/.mvn/
+/jaagro-platform-tms/target/
