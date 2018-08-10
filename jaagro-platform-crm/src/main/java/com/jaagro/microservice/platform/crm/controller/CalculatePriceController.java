@@ -2,8 +2,8 @@ package com.jaagro.microservice.platform.crm.controller;
 
 import com.jaagro.microservice.platform.api.dto.crm.PriceCriteriaDto;
 import com.jaagro.microservice.platform.api.service.crm.CalculatePriceService;
-import com.jaagro.microservice.platform.component.utils.ResponseStatusCode;
-import com.jaagro.microservice.platform.component.utils.ServiceResult;
+import com.jaagro.microservice.platform.common.utils.ResponseStatusCode;
+import com.jaagro.microservice.platform.common.utils.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

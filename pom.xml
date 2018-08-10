@@ -125,7 +125,7 @@
         <module>jaagro-platform-gateway</module>
         <module>jaagro-platform-monitor</module>
         <module>jaagro-platform-config</module>
-        <module>jaagro-platform-component</module>
+        <module>jaagro-platform-common</module>
         <module>jaagro-platform-api</module>
         <module>jaagro-platform-biz</module>
         <module>jaagro-platform-tms</module>

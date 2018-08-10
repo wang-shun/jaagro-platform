@@ -2,7 +2,7 @@ package com.jaagro.microservice.platform.biz.controller;
 
 import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractClientService;
-import com.jaagro.microservice.platform.component.utils.BaseResponse;
+import com.jaagro.microservice.platform.common.utils.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

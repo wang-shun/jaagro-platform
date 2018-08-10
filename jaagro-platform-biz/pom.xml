@@ -22,7 +22,7 @@
         <!-- 引入公用api模块 -->
         <dependency>
             <groupId>com.jaagro.microservice.platform</groupId>
-            <artifactId>jaagro-platform-component</artifactId>
+            <artifactId>jaagro-platform-common</artifactId>
             <version>${platformcomp.version}</version>
         </dependency>
         <dependency>

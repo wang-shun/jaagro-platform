@@ -31,7 +31,7 @@ public class SwaggerConfig {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("jaagro tms2.0 component")
+                .title("jaagro tms2.0 crm")
                 .description("Token获取方式请联系管理员")
                 .termsOfServiceUrl("http://")
                 .version("1.0")

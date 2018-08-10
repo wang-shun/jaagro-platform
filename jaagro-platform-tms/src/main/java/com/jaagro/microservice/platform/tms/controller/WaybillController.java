@@ -2,7 +2,7 @@ package com.jaagro.microservice.platform.tms.controller;
 
 import com.jaagro.microservice.platform.api.dto.tms.CreateWaybillByExcelDto;
 import com.jaagro.microservice.platform.api.service.tms.WaybillService;
-import com.jaagro.microservice.platform.component.utils.ServiceResult;
+import com.jaagro.microservice.platform.common.utils.ServiceResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
