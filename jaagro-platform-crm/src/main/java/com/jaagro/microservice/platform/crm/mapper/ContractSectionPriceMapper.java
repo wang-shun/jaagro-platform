@@ -1,6 +1,7 @@
 package com.jaagro.microservice.platform.crm.mapper;
 
 import com.jaagro.microservice.platform.crm.entity.ContractSectionPrice;
+import com.jaagro.microservice.platform.crm.entity.response.ContractSectionPriceReturnDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
@@ -24,13 +25,15 @@ public interface ContractSectionPriceMapper {
 
     /**
      * 根据priceId获取所有sectionPrice记录
+     *
      * @param priceId
      * @return
      */
-    List<ContractSectionPrice> listByPriceId(Long priceId);
+    List<ContractSectionPriceReturnDto> listByPriceId(Long priceId);
 
     /**
      * 根据传入值查询出符合limit条件的sectionPrice
+     *
      * @param contractPriceId
      * @param value
      * @return

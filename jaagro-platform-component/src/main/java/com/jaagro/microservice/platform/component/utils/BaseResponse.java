@@ -11,12 +11,12 @@ public class BaseResponse implements Serializable {
     /**
      * 状态
      */
-    private int statusCode = StatusCode.OPERATION_SUCCESS.getCode();
+    private int statusCode = ResponseStatusCode.OPERATION_SUCCESS.getCode();
 
     /**
      * 错误信息 返回错误时必填
      */
-    private String statusMsg = StatusCode.OPERATION_SUCCESS.getMsg();
+    private String statusMsg = ResponseStatusCode.OPERATION_SUCCESS.getMsg();
 
     /**
      * 数据
@@ -49,7 +49,7 @@ public class BaseResponse implements Serializable {
         this.statusCode = statusCode;
     }
 
-    public BaseResponse setStatusCode(StatusCode statusCode) {
+    public BaseResponse setStatusCode(ResponseStatusCode statusCode) {
         this.setStatusCode(statusCode.getCode());
         this.setStatusMsg(statusCode.getMsg());
         return this;
@@ -71,7 +71,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse successInstance(Object date) {
         BaseResponse response = new BaseResponse();
-        response.setStatusCode(StatusCode.OPERATION_SUCCESS);
+        response.setStatusCode(ResponseStatusCode.OPERATION_SUCCESS);
         return response.setData(date);
     }
 
@@ -82,7 +82,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse successInstance(String msg) {
         BaseResponse response = new BaseResponse();
-        response.setStatusCode(StatusCode.OPERATION_SUCCESS);
+        response.setStatusCode(ResponseStatusCode.OPERATION_SUCCESS);
         response.setStatusMsg(msg);
         return response;
     }
@@ -94,7 +94,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse errorInstance(String errorMsg) {
         BaseResponse response = new BaseResponse();
-        response.setStatusCode(StatusCode.SERVER_ERROR);
+        response.setStatusCode(ResponseStatusCode.SERVER_ERROR);
         response.setStatusMsg(errorMsg);
         return response;
     }
@@ -105,7 +105,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse notLogin() {
         BaseResponse response = new BaseResponse();
-        response.setStatusCode(StatusCode.UNAUTHORIZED_ERROR);
+        response.setStatusCode(ResponseStatusCode.UNAUTHORIZED_ERROR);
         response.setStatusMsg("登录失效，请重新登录！");
         return response;
     }
@@ -117,7 +117,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse queryDataEmpty() {
         BaseResponse response = new BaseResponse();
-        StatusCode statusCode = StatusCode.QUERY_DATA_EMPTY;
+        ResponseStatusCode statusCode = ResponseStatusCode.QUERY_DATA_EMPTY;
         response.setStatusCode(statusCode);
         return response;
     }
@@ -129,7 +129,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse idError(String... idName) {
         BaseResponse response = new BaseResponse();
-        StatusCode statusCode = StatusCode.ID_VALUE_ERROR;
+        ResponseStatusCode statusCode = ResponseStatusCode.ID_VALUE_ERROR;
         response.setStatusCode(statusCode);
         for (String id : idName) {
             response.setStatusMsg(statusCode.getMsg() + ":参数" + id);
@@ -144,7 +144,7 @@ public class BaseResponse implements Serializable {
      */
     public static BaseResponse idNull(String... idName) {
         BaseResponse response = new BaseResponse();
-        StatusCode statusCode = StatusCode.ID_VALUE_NULL;
+        ResponseStatusCode statusCode = ResponseStatusCode.ID_VALUE_NULL;
         response.setStatusCode(statusCode);
         for (String id : idName) {
             response.setStatusMsg(statusCode.getMsg() + ":没有传输参数" + id);
@@ -169,7 +169,7 @@ public class BaseResponse implements Serializable {
         Object status = map.get(ServiceKey.status.name());
         int statusCode;
         if (status == null) {
-            statusCode = StatusCode.SERVER_ERROR.getCode();
+            statusCode = ResponseStatusCode.SERVER_ERROR.getCode();
         } else {
             statusCode = (int) status;
         }

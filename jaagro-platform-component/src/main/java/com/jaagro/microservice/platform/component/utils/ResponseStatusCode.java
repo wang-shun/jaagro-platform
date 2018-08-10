@@ -5,7 +5,7 @@ package com.jaagro.microservice.platform.component.utils;
  * @author admin
  * 枚举 -- 返回给客户端的状态码和状态信息
  */
-public enum StatusCode {
+public enum ResponseStatusCode {
 
     /**
      * 操作成功
@@ -57,7 +57,7 @@ public enum StatusCode {
      */
     private String msg;
 
-    StatusCode(int statusCode, String statusMsg) {
+    ResponseStatusCode(int statusCode, String statusMsg) {
         this.code = statusCode;
         this.msg = statusMsg;
     }
@@ -80,7 +80,7 @@ public enum StatusCode {
 
     @Override
     public String toString() {
-        return "StatusCode{" +
+        return "ResponseStatusCode{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 '}';

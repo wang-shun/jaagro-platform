@@ -4,7 +4,7 @@ import com.jaagro.microservice.platform.api.dto.crm.PriceCriteriaDto;
 import com.jaagro.microservice.platform.api.dto.crm.PriceReturnDto;
 import com.jaagro.microservice.platform.api.service.crm.CalculatePriceService;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
-import com.jaagro.microservice.platform.component.utils.StatusCode;
+import com.jaagro.microservice.platform.component.utils.ResponseStatusCode;
 import com.jaagro.microservice.platform.crm.constant.PricingType;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
 import com.jaagro.microservice.platform.crm.entity.ContractSectionPrice;
@@ -40,7 +40,7 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按数量计价
         if(PricingType.QUANTITY.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getQuantity())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "数量不能为空");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "数量不能为空");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){
@@ -56,10 +56,10 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按每车计价
         if(PricingType.VEHICLE.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getShippingAddressId())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "请选择收货地址");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "请选择收货地址");
             }
             if(StringUtils.isEmpty(dto.getPickupAddressId())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "请选择提货地址");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "请选择提货地址");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){
@@ -74,7 +74,7 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按里程计价
         if(PricingType.MILEAGE.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getMileage())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){
@@ -90,7 +90,7 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按起步里程数加价
         if(PricingType.MILEAGE_RAISE_PRICE.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getMileage())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){
@@ -115,7 +115,7 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按里程区间计价
         if(PricingType.MILEAGE_SUBSECTION_PRICE.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getMileage())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "里程数不能为空");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){
@@ -143,7 +143,7 @@ public class CalculatePriceServiceImpl implements CalculatePriceService {
         //按重量计价
         if(PricingType.WEIGHT.longValue() == dto.getPricingType()){
             if(StringUtils.isEmpty(dto.getWeight())){
-                return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "重量不能为空");
+                return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "重量不能为空");
             }
             ContractPrice cp = contractPriceMapper.getPriceByCriteria(dto);
             if(cp == null){

@@ -2,21 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jaagro.microservice.platform.crm.mapper.ContractPriceMapper">
   <resultMap id="BaseResultMap" type="com.jaagro.microservice.platform.crm.entity.ContractPrice">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="contract_id" jdbcType="BIGINT" property="contractId" />
-    <result column="pricing_type" jdbcType="INTEGER" property="pricingType" />
-    <result column="pickup_address_id" jdbcType="BIGINT" property="pickupAddressId" />
-    <result column="shipping_address_id" jdbcType="BIGINT" property="shippingAddressId" />
-    <result column="vehicle_type" jdbcType="BIGINT" property="vehicleType" />
-    <result column="product_type" jdbcType="BIGINT" property="productType" />
-    <result column="specification" jdbcType="VARCHAR" property="specification" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="has_weight_section_values" jdbcType="INTEGER" property="hasWeightSectionValues" />
-    <result column="has_mile_section_values" jdbcType="INTEGER" property="hasMileSectionValues" />
-    <result column="min_mile" jdbcType="DECIMAL" property="minMile" />
-    <result column="min_weight" jdbcType="DECIMAL" property="minWeight" />
-    <result column="min_money" jdbcType="DECIMAL" property="minMoney" />
-    <result column="price_status" jdbcType="INTEGER" property="priceStatus" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="contract_id" jdbcType="BIGINT" property="contractId"/>
+    <result column="pricing_type" jdbcType="INTEGER" property="pricingType"/>
+    <result column="pickup_address_id" jdbcType="BIGINT" property="pickupAddressId"/>
+    <result column="shipping_address_id" jdbcType="BIGINT" property="shippingAddressId"/>
+    <result column="vehicle_type" jdbcType="BIGINT" property="vehicleType"/>
+    <result column="product_type" jdbcType="BIGINT" property="productType"/>
+    <result column="specification" jdbcType="VARCHAR" property="specification"/>
+    <result column="price" jdbcType="DECIMAL" property="price"/>
+    <result column="has_weight_section_values" jdbcType="INTEGER" property="hasWeightSectionValues"/>
+    <result column="has_mile_section_values" jdbcType="INTEGER" property="hasMileSectionValues"/>
+    <result column="min_mile" jdbcType="DECIMAL" property="minMile"/>
+    <result column="min_weight" jdbcType="DECIMAL" property="minWeight"/>
+    <result column="min_money" jdbcType="DECIMAL" property="minMoney"/>
+    <result column="price_status" jdbcType="INTEGER" property="priceStatus"/>
+  </resultMap>
+
+  <resultMap id="DetailInfo" type="com.jaagro.microservice.platform.crm.entity.response.ContractPriceReturnDto">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="contract_id" jdbcType="BIGINT" property="contractId"/>
+    <result column="pricing_type" jdbcType="INTEGER" property="pricingType"/>
+    <result column="pickup_address_id" jdbcType="BIGINT" property="pickupAddressId"/>
+    <result column="shipping_address_id" jdbcType="BIGINT" property="shippingAddressId"/>
+    <result column="vehicle_type" jdbcType="BIGINT" property="vehicleType"/>
+    <result column="product_type" jdbcType="BIGINT" property="productType"/>
+    <result column="specification" jdbcType="VARCHAR" property="specification"/>
+    <result column="price" jdbcType="DECIMAL" property="price"/>
+    <result column="has_weight_section_values" jdbcType="INTEGER" property="hasWeightSectionValues"/>
+    <result column="has_mile_section_values" jdbcType="INTEGER" property="hasMileSectionValues"/>
+    <result column="min_mile" jdbcType="DECIMAL" property="minMile"/>
+    <result column="min_weight" jdbcType="DECIMAL" property="minWeight"/>
+    <result column="min_money" jdbcType="DECIMAL" property="minMoney"/>
+    <result column="price_status" jdbcType="INTEGER" property="priceStatus"/>
+
+    <collection property="sectionPrice" column="id"
+                select="com.jaagro.microservice.platform.crm.mapper.ContractSectionPriceMapper.listByPriceId"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, contract_id, pricing_type, pickup_address_id, shipping_address_id, vehicle_type, 
@@ -227,14 +248,20 @@
       price_status = #{priceStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByContractId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getByContractId" parameterType="java.lang.Long" resultMap="DetailInfo">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
+    from contract_price
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </select>
+  <select id="listByContractId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
     from contract_price
     where contract_id = #{contractId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByContractId" parameterType="java.lang.Long">
-    delete from contract_price
-    where contract_id = #{contractId,jdbcType=BIGINT}
-  </delete>
+        delete from contract_price
+        where contract_id = #{contractId,jdbcType=BIGINT}
+    </delete>
 </mapper>

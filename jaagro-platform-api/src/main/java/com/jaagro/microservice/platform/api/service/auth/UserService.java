@@ -1,5 +1,7 @@
 package com.jaagro.microservice.platform.api.service.auth;
 
+import com.jaagro.microservice.platform.api.dto.auth.TokenInfo;
+
 import java.util.Map;
 
 /**
