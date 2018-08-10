@@ -5,7 +5,7 @@ import com.jaagro.microservice.platform.api.dto.auth.TokenInfo;
 import com.jaagro.microservice.platform.auth.entity.User;
 import com.jaagro.microservice.platform.auth.mapper.UserMapper;
 import com.jaagro.microservice.platform.auth.service.AuthService;
-import com.jaagro.microservice.platform.component.utils.BaseResponse;
+import com.jaagro.microservice.platform.common.utils.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;

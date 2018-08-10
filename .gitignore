@@ -11,8 +11,6 @@ gen
 /jaagro-platform-auth/target/
 /jaagro-platform-biz/target/
 /jaagro-platform-biz/.mvn/
-/jaagro-platform-component/.mvn/
-/jaagro-platform-component/target/
 /jaagro-platform-crm/.mvn/
 /jaagro-platform-config/.mvn/
 /jaagro-platform-crm/target/
@@ -24,3 +22,6 @@ gen
 /jaagro-platform-monitor/target/
 /jaagro-platform-tms/.mvn/
 /jaagro-platform-tms/target/
+/jaagro-platform-config/target/
+/jaagro-platform-common/.mvn/
+/jaagro-platform-common/target/

@@ -1,8 +1,8 @@
 package com.jaagro.microservice.platform.auth.controller;
 
 import com.jaagro.microservice.platform.api.service.auth.UserService;
-import com.jaagro.microservice.platform.component.utils.ServiceResult;
-import com.jaagro.microservice.platform.component.utils.VerificationPhone;
+import com.jaagro.microservice.platform.common.utils.ServiceResult;
+import com.jaagro.microservice.platform.common.utils.VerificationPhone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

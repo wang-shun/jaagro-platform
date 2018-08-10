@@ -3,7 +3,7 @@ package com.jaagro.microservice.platform.tms.service;
 import com.jaagro.microservice.platform.api.dto.tms.CreateWaybillByExcelDto;
 import com.jaagro.microservice.platform.api.dto.tms.LoadExcelDto;
 import com.jaagro.microservice.platform.api.service.tms.WaybillService;
-import com.jaagro.microservice.platform.component.utils.ServiceResult;
+import com.jaagro.microservice.platform.common.utils.ServiceResult;
 import com.jaagro.microservice.platform.tms.dto.NewWaybillDto;
 import com.jaagro.microservice.platform.tms.entity.Waybill;
 import com.jaagro.microservice.platform.tms.entity.WaybillProduct;
