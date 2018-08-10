@@ -20,7 +20,7 @@
     where selection_id = #{selectionId,jdbcType=INTEGER}
   </select>
     <select id="listByPriceId"
-            resultType="com.jaagro.microservice.platform.crm.entity.response.ContractSectionPriceReturnDto">
+            resultType="com.jaagro.microservice.platform.crm.entity.ContractSectionPrice">
       select
       <include refid="Base_Column_List"></include>
       from contract_section_price
@@ -133,10 +133,4 @@
     delete from contract_section_price
     where contract_price_id = #{contractPriceId,jdbcType=BIGINT}
   </delete>
-  <select id="getByFKId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from contract_section_price
-    where contract_price_id = #{contractPriceId,jdbcType=BIGINT}
-  </select>
 </mapper>

@@ -61,44 +61,16 @@ public class AuthServiceImpl implements AuthService {
         if(!encodePassword.equals(user.getPassword())){
             return ServiceResult.error(StatusCode.UNAUTHORIZED_ERROR.getCode(), "用户名或密码错误");
         }
-
-        //签发时间
-        Date iatDate = new Date();
-
-        //token过期时间
-        Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.MINUTE, 60 * 12);
-        Date expiresDate = nowTime.getTime();
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("alg", "HS256");
-        map.put("type", "JWT");
-
-        String token = null;
-        try {
-            token = JWT.create()
-                    //header
-                    .withHeader(map)
-                    //payload：用于存放有效信息的地方
-                    .withClaim("user", user.getId().toString())
-                    //设置过期时间，过期时间必须大于签发时间
-                    .withExpiresAt(expiresDate)
-                    //设置签发时间
-                    .withIssuedAt(iatDate)
-                    //加密
-                    .sign(Algorithm.HMAC256(SECRET_KET));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return ServiceResult.error("令牌生成失败");
-        }
-        return ServiceResult.toResult(token);
+        return createToken(user);
     }
 
     @Override
     public Map<String, Object> createTokenByPhone(String phoneNumber, String verificationCode) {
-
         User user = userMapper.getUserByPhone(phoneNumber);
+        return createToken(user);
+    }
 
+    private Map<String, Object> createToken(User user){
         //签发时间
         Date iatDate = new Date();
 

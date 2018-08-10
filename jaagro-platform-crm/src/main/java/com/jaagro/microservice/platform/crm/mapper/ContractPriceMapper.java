@@ -2,7 +2,6 @@ package com.jaagro.microservice.platform.crm.mapper;
 
 import com.jaagro.microservice.platform.api.dto.crm.PriceCriteriaDto;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
-import com.jaagro.microservice.platform.crm.entity.response.ContractPriceReturnDto;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public interface ContractPriceMapper {
     /**
      * 删除
-     *
      * @param id
      * @return
      */
@@ -20,7 +18,6 @@ public interface ContractPriceMapper {
 
     /**
      * 新增全表
-     *
      * @param record
      * @return
      */
@@ -28,7 +25,6 @@ public interface ContractPriceMapper {
 
     /**
      * 新增关键字段
-     *
      * @param record
      * @return
      */
@@ -36,7 +32,6 @@ public interface ContractPriceMapper {
 
     /**
      * 获取单条
-     *
      * @param id
      * @return
      */
@@ -44,7 +39,6 @@ public interface ContractPriceMapper {
 
     /**
      * 依据字段修改
-     *
      * @param record
      * @return
      */
@@ -52,7 +46,6 @@ public interface ContractPriceMapper {
 
     /**
      * 修改全表
-     *
      * @param record
      * @return
      */
@@ -60,23 +53,13 @@ public interface ContractPriceMapper {
 
     /**
      * 根据合同id 查出所有price记录
-     *
      * @param contractId
      * @return
      */
-    List<ContractPrice> listByContractId(Long contractId);
-
-    /**
-     * 根据合同id 查出所有priceDto记录
-     *
-     * @param contractId
-     * @return
-     */
-    List<ContractPriceReturnDto> getByContractId(Long contractId);
+    List<ContractPrice> selectByContractId(Long contractId);
 
     /**
      * 根据合同id删除price记录
-     *
      * @param contractId
      * @return
      */
@@ -84,7 +67,6 @@ public interface ContractPriceMapper {
 
     /**
      * 依据条件dto查询price对象
-     *
      * @param dto
      * @return
      */

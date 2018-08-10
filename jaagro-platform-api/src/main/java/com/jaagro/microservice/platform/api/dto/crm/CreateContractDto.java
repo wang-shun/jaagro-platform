@@ -47,5 +47,4 @@ public class CreateContractDto implements Serializable {
     private Integer version;
 
     private List<ContractPriceDto> price;
-
 }
