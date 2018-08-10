@@ -246,7 +246,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="listByPage" parameterType="com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto"
-            resultMap="BaseResultMap">
+            resultMap="DetailInfo">
         select
         <include refid="Base_Column_List"/>
         from contract

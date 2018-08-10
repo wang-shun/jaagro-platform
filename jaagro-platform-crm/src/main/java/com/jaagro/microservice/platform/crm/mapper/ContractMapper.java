@@ -66,7 +66,7 @@ public interface ContractMapper {
      * @param dto
      * @return
      */
-    List<Contract> listByPage(ContractCriteriaDto dto);
+    List<ContractReturnDto> listByPage(ContractCriteriaDto dto);
 
     /**
      * 查询单个Dto

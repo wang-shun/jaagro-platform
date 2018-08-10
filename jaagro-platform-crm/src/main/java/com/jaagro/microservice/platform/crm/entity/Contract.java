@@ -48,6 +48,4 @@ public class Contract implements Serializable {
     private Long newUpdateUser;
 
     private Integer version;
-
-    private List<ContractPrice> prices;
 }

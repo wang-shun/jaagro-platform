@@ -43,6 +43,4 @@ public class ContractPrice implements Serializable {
     private BigDecimal minMoney;
 
     private Integer priceStatus;
-
-    private List<ContractSectionPrice> sectionPrice;
 }

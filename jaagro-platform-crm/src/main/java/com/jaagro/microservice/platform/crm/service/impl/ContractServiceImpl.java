@@ -158,7 +158,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Map<String, Object> listByPage(ContractCriteriaDto dto) {
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
-        List<Contract> contracts = contractMapper.listByPage(dto);
+        List<ContractReturnDto> contracts = contractMapper.listByPage(dto);
         return ServiceResult.toResult(new PageInfo<>(contracts));
     }
 
