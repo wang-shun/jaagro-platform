@@ -1,19 +1,19 @@
 package com.jaagro.microservice.platform.crm.controller;
 
 import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
+import com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
 import com.jaagro.microservice.platform.component.utils.StatusCode;
 import com.jaagro.microservice.platform.crm.mapper.ContractMapper;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -64,6 +64,23 @@ public class ContractController {
             return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), e.getMessage());
         }
         return result;
+    }
+
+    @ApiOperation("查询单个合同")
+    @GetMapping("getContractByPK")
+    @ApiImplicitParam(name = "id", value = "合同主键id", paramType = "query", required = true)
+    public Map<String, Object> getContractByPK(Long id) {
+        Map<String, Object> result = null;
+        result = contractService.getContractByPk(id);
+        return result;
+    }
+
+    @ApiOperation("分页查询合同")
+    @PostMapping("getPage")
+    @ApiImplicitParams({@ApiImplicitParam(name = "pageNum", value = "起始页 [默认1]", paramType = "query", required = false),
+            @ApiImplicitParam(name = "pageSize", value = "分页大小[默认10]", paramType = "query", required = false)})
+    public Map<String, Object> getContractByDto(@RequestBody ContractCriteriaDto dto) {
+        return contractService.listByPage(dto);
     }
 
 }

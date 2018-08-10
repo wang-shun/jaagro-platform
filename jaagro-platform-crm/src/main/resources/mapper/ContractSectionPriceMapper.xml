@@ -19,13 +19,13 @@
     from contract_section_price
     where selection_id = #{selectionId,jdbcType=INTEGER}
   </select>
-    <select id="listByPriceId"
-            resultType="com.jaagro.microservice.platform.crm.entity.ContractSectionPrice">
-      select
-      <include refid="Base_Column_List"></include>
-      from contract_section_price
-      where contract_price_id = #{priceId}
-    </select>
+  <select id="listByPriceId"
+          resultType="com.jaagro.microservice.platform.crm.entity.response.ContractSectionPriceReturnDto">
+    select
+    <include refid="Base_Column_List"></include>
+    from contract_section_price
+    where contract_price_id = #{priceId}
+  </select>
   <select id="getByLimit"
           resultType="com.jaagro.microservice.platform.crm.entity.ContractSectionPrice">
     select
