@@ -50,7 +50,7 @@
     delete from contract_price
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.jaagro.microservice.platform.crm.entity.ContractPrice">
+  <insert id="insert" parameterType="com.jaagro.microservice.platform.crm.entity.ContractPrice" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into contract_price (id, contract_id, pricing_type, 
       pickup_address_id, shipping_address_id, vehicle_type, 
       product_type, specification, price, 

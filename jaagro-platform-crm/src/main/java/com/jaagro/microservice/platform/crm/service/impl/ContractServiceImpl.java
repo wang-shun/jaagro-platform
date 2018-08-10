@@ -56,30 +56,9 @@ public class ContractServiceImpl implements ContractService {
                 // 先写一个固定值，等userService创建后补充
                 .setCreateUser(1L);
         contractMapper.insert(contract);
-        System.out.println(contract.getId());
 
         //创建contractPrice对象
-        if (dto.getPrice() != null && dto.getPrice().size() > 0) {
-            for (ContractPriceDto cp : dto.getPrice()) {
-                ContractPrice contractPrice = new ContractPrice();
-                BeanUtils.copyProperties(cp, contractPrice);
-                contractPrice.setContractId(contract.getId());
-                if (StringUtils.isEmpty(contractPrice.getPricingType())) {
-                    throw new RuntimeException("计价方式不能为空");
-                }
-                contractPriceMapper.insert(contractPrice);
-                //创建contractSectionPrice对象
-                if (cp.getSectionPrice() != null && cp.getSectionPrice().size() > 0) {
-                    for (ContractSectionPriceDto cspDto : cp.getSectionPrice()) {
-                        ContractSectionPrice csp = new ContractSectionPrice();
-                        BeanUtils.copyProperties(cspDto, csp);
-                        csp.setContractPriceId(contractPrice.getId());
-                        contractSectionPriceMapper.insert(csp);
-                    }
-                }
-            }
-        }
-
+        createPrice(dto, contract);
         return ServiceResult.toResult("合同创建成功");
     }
 
@@ -109,6 +88,12 @@ public class ContractServiceImpl implements ContractService {
             contractPriceMapper.deleteByContractId(dto.getId());
         }
         //创建contractPrice对象
+        createPrice(dto, contract);
+        return ServiceResult.toResult("合同修改成功");
+    }
+
+    private void createPrice(CreateContractDto dto, Contract contract){
+        //创建contractPrice对象
         if (dto.getPrice() != null && dto.getPrice().size() > 0) {
             for (ContractPriceDto cp : dto.getPrice()) {
                 ContractPrice contractPrice = new ContractPrice();
@@ -129,8 +114,6 @@ public class ContractServiceImpl implements ContractService {
                 }
             }
         }
-        return ServiceResult.toResult("合同修改成功");
     }
-
 
 }
