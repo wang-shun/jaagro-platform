@@ -9,6 +9,6 @@ spring:
       server:
         git:
 #        github上面code的路径要注意
-          uri: https://github.com/zhengxingtao/jaagro-platform-config.git
+          uri: https://git.coding.net/zhengxingtao/jaagro-platform-config.git
           username: zhengxingtao
           password: tao891224

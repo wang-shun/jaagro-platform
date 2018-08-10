@@ -2,8 +2,8 @@ package com.jaagro.microservice.platform.crm.controller;
 
 import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
+import com.jaagro.microservice.platform.component.utils.ResponseStatusCode;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
-import com.jaagro.microservice.platform.component.utils.StatusCode;
 import com.jaagro.microservice.platform.crm.mapper.ContractMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,14 +34,14 @@ public class ContractController {
     public Map<String, Object> createContract(@RequestBody CreateContractDto dto) {
 
         if (StringUtils.isEmpty(dto.getCustomerId())) {
-            return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), "合同客户不能为空");
+            return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), "合同客户不能为空");
         }
         Map<String, Object> result = null;
         try {
             result = contractService.createContract(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), e.getMessage());
+            return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), e.getMessage());
         }
         return result;
     }
@@ -51,17 +51,17 @@ public class ContractController {
     public Map<String, Object> updateContract(@RequestBody CreateContractDto dto) {
 
         if (contractMapper.selectByPrimaryKey(dto.getId()) == null) {
-            return ServiceResult.error(StatusCode.ID_VALUE_NULL.getCode(), dto.getId() + " :合同不存在");
+            return ServiceResult.error(ResponseStatusCode.ID_VALUE_NULL.getCode(), dto.getId() + " :合同不存在");
         }
         if (StringUtils.isEmpty(dto.getCustomerId())) {
-            return ServiceResult.error(StatusCode.ID_VALUE_ERROR.getCode(), "合同客户不能为空");
+            return ServiceResult.error(ResponseStatusCode.ID_VALUE_ERROR.getCode(), "合同客户不能为空");
         }
         Map<String, Object> result = null;
         try {
             result = contractService.updateContract(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            return ServiceResult.error(StatusCode.QUERY_DATA_ERROR.getCode(), e.getMessage());
+            return ServiceResult.error(ResponseStatusCode.QUERY_DATA_ERROR.getCode(), e.getMessage());
         }
         return result;
     }

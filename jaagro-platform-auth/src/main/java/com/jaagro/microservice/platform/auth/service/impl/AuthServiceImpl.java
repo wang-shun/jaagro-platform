@@ -11,8 +11,8 @@ import com.jaagro.microservice.platform.auth.mapper.UserMapper;
 import com.jaagro.microservice.platform.auth.service.AuthService;
 import com.jaagro.microservice.platform.component.exception.AuthorizationException;
 import com.jaagro.microservice.platform.component.utils.MD5Utils;
+import com.jaagro.microservice.platform.component.utils.ResponseStatusCode;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
-import com.jaagro.microservice.platform.component.utils.StatusCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SocketUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -59,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userMapper.getUerByUsername(username);
         String encodePassword = MD5Utils.encode(password, user.getSalt());
         if(!encodePassword.equals(user.getPassword())){
-            return ServiceResult.error(StatusCode.UNAUTHORIZED_ERROR.getCode(), "用户名或密码错误");
+            return ServiceResult.error(ResponseStatusCode.UNAUTHORIZED_ERROR.getCode(), "用户名或密码错误");
         }
         return createToken(user);
     }
@@ -79,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
         nowTime.add(Calendar.MINUTE, 60 * 12);
         Date expiresDate = nowTime.getTime();
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(16);
         map.put("alg", "HS256");
         map.put("type", "JWT");
 

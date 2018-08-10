@@ -3,9 +3,9 @@ package com.jaagro.microservice.platform.crm.service.impl;
 import com.jaagro.microservice.platform.api.dto.crm.ContractPriceDto;
 import com.jaagro.microservice.platform.api.dto.crm.ContractSectionPriceDto;
 import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
+import com.jaagro.microservice.platform.api.service.auth.CurrentUserService;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
-import com.jaagro.microservice.platform.component.utils.StatusCode;
 import com.jaagro.microservice.platform.crm.entity.Contract;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
 import com.jaagro.microservice.platform.crm.entity.ContractSectionPrice;
@@ -37,6 +37,8 @@ public class ContractServiceImpl implements ContractService {
     private ContractSectionPriceMapper contractSectionPriceMapper;
     @Autowired
     private ContractLogMapper contractLogMapper;
+    @Autowired
+    private CurrentUserService userService;
 
     /**
      * 创建合同
@@ -53,8 +55,7 @@ public class ContractServiceImpl implements ContractService {
         BeanUtils.copyProperties(dto, contract);
         contract
                 .setCreateTime(new Date())
-                // 先写一个固定值，等userService创建后补充
-                .setCreateUser(1L);
+                .setCreateUser(userService.getCurrentUser().getId());
         contractMapper.insert(contract);
 
         //创建contractPrice对象
@@ -75,8 +76,7 @@ public class ContractServiceImpl implements ContractService {
         BeanUtils.copyProperties(dto, contract);
         contract
                 .setNewUpdateTime(new Date())
-                // 先写一个固定值，等userService创建后补充
-                .setNewUpdateUser(1L);
+                .setNewUpdateUser(userService.getCurrentUser().getId());
         contractMapper.updateByPrimaryKeySelective(contract);
 
         //删除原数据
