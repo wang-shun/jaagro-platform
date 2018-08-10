@@ -1,14 +1,18 @@
 package com.jaagro.microservice.platform.crm.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jaagro.microservice.platform.api.dto.crm.ContractPriceDto;
 import com.jaagro.microservice.platform.api.dto.crm.ContractSectionPriceDto;
 import com.jaagro.microservice.platform.api.dto.crm.CreateContractDto;
 import com.jaagro.microservice.platform.api.service.auth.CurrentUserService;
+import com.jaagro.microservice.platform.api.dto.crm.request.ContractCriteriaDto;
 import com.jaagro.microservice.platform.api.service.crm.ContractService;
 import com.jaagro.microservice.platform.component.utils.ServiceResult;
 import com.jaagro.microservice.platform.crm.entity.Contract;
 import com.jaagro.microservice.platform.crm.entity.ContractPrice;
 import com.jaagro.microservice.platform.crm.entity.ContractSectionPrice;
+import com.jaagro.microservice.platform.crm.entity.response.ContractReturnDto;
 import com.jaagro.microservice.platform.crm.mapper.ContractLogMapper;
 import com.jaagro.microservice.platform.crm.mapper.ContractMapper;
 import com.jaagro.microservice.platform.crm.mapper.ContractPriceMapper;
@@ -65,6 +69,7 @@ public class ContractServiceImpl implements ContractService {
 
     /**
      * 修改合同
+     *
      * @param dto
      * @return
      */
@@ -80,8 +85,8 @@ public class ContractServiceImpl implements ContractService {
         contractMapper.updateByPrimaryKeySelective(contract);
 
         //删除原数据
-        List<ContractPrice> priceList = contractPriceMapper.selectByContractId(dto.getId());
-        if(priceList.size() > 0) {
+        List<ContractPrice> priceList = contractPriceMapper.listByContractId(dto.getId());
+        if (priceList.size() > 0) {
             for (ContractPrice cp : priceList) {
                 contractSectionPriceMapper.deleteByPriceId(cp.getId());
             }
@@ -92,7 +97,7 @@ public class ContractServiceImpl implements ContractService {
         return ServiceResult.toResult("合同修改成功");
     }
 
-    private void createPrice(CreateContractDto dto, Contract contract){
+    private void createPrice(CreateContractDto dto, Contract contract) {
         //创建contractPrice对象
         if (dto.getPrice() != null && dto.getPrice().size() > 0) {
             for (ContractPriceDto cp : dto.getPrice()) {
@@ -114,6 +119,33 @@ public class ContractServiceImpl implements ContractService {
                 }
             }
         }
+    }
+
+    /**
+     * 查询单个合同
+     *
+     * @param contractId
+     * @return
+     */
+    @Override
+    public Map<String, Object> getContractByPk(Long contractId) {
+        if (contractId == null) {
+            return ServiceResult.error(StatusCode.ID_VALUE_ERROR.getCode(), "contractId不能为空");
+        }
+        return ServiceResult.toResult(contractMapper.getByPrimaryKey(contractId));
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    public Map<String, Object> listByPage(ContractCriteriaDto dto) {
+        PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
+        List<ContractReturnDto> contracts = contractMapper.listByPage(dto);
+        return ServiceResult.toResult(new PageInfo<>(contracts));
     }
 
 }
